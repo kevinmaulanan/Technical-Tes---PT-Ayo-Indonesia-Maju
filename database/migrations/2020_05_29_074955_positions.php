@@ -15,7 +15,7 @@ class Positions extends Migration
     {
         Schema::create('positions', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('position',191)->unique();
+            $table->string('position')->unique();
 
             $table->softDeletes();
             

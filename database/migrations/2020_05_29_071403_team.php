@@ -18,9 +18,11 @@ class Team extends Migration
             
             $table->string('team_name')->unique();
             $table->string('team_logo');
-            $table->string('team_since');
+            $table->date('team_since');
             $table->string('team_address',1024);
             $table->string('team_city',64);
+
+            
 
             $table->timestamps();
             $table->softDeletes();

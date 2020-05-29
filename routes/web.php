@@ -16,3 +16,15 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/admin', function () {
+    return view('welcome');
+});
+
+Route::get('/admin', 'AdminsController@home');
+
+
+Route::get('/admin/team', 'AdminsController@team');
+Route::get('/admin/team/create', 'AdminsController@teamcreateview');
+
+Route::post('/admin/team', 'AdminsController@teamcreate');
