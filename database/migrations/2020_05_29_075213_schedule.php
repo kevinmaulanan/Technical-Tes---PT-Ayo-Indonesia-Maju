@@ -13,7 +13,7 @@ class Schedule extends Migration
      */
     public function up()
     {
-        Schema::create('shedules', function (Blueprint $table) {
+        Schema::create('schedules', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->date('match_date');
             $table->time('match_time');

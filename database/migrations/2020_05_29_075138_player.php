@@ -19,7 +19,7 @@ class Player extends Migration
             $table->string('player_name')->unique();
             $table->integer('player_tall');
             $table->integer('player_weight');
-            $table->integer('player_nomor')->unique();
+            $table->integer('player_nomor');
             $table->unsignedBigInteger('id_position');
             $table->unsignedBigInteger('id_team');
            

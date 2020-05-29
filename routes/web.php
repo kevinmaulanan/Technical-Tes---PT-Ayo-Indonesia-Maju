@@ -26,5 +26,13 @@ Route::get('/admin', 'AdminsController@home');
 
 Route::get('/admin/team', 'AdminsController@team');
 Route::get('/admin/team/create', 'AdminsController@teamcreateview');
-
 Route::post('/admin/team', 'AdminsController@teamcreate');
+
+
+Route::get('/admin/player', 'AdminsController@player');
+Route::get('/admin/player/create', 'AdminsController@playercreateview');
+Route::post('/admin/player', 'AdminsController@playercreate');
+
+Route::get('/admin/schedule', 'AdminsController@schedule');
+Route::get('/admin/schedule/create', 'AdminsController@schedulecreateview');
+Route::post('/admin/schedule', 'AdminsController@schedulecreate');
