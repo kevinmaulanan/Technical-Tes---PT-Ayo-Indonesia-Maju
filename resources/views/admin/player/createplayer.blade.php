@@ -12,7 +12,7 @@
 
                 <div class="form-group">
                   <label for="player">Nama Pemain</label>
-                  <input type="text" class="form-control @error('player') is-invalid @enderror" id="player" placeholder="Masukkan nama tim" name="player" value="{{old('player')}}">
+                  <input type="text" class="form-control @error('player') is-invalid @enderror" id="player" placeholder="Masukkan Nama Pemain" name="player" value="{{old('player')}}">
 
                   @error('player')
                     <div class="invalid-feedback">{{ $message }}</div>
@@ -21,7 +21,7 @@
 
                 <div class="form-group">
                     <label for="nama">Tinggi Badan</label>
-                    <input type="number" class="form-control @error('tall') is-invalid @enderror" id="tall" placeholder="Masukkan nama tim" name="tall" value="{{old('tall')}}">
+                    <input type="number" class="form-control @error('tall') is-invalid @enderror" id="tall" placeholder="Masukkan Tinggi Badan" name="tall" value="{{old('tall')}}">
   
                     @error('tall')
                         <div class="invalid-feedback">{{ $message }}</div>
@@ -30,7 +30,7 @@
 
                 <div class="form-group">
                     <label for="nama">Berat Badan</label>
-                    <input type="number" class="form-control @error('weight') is-invalid @enderror" id="weight" placeholder="Masukkan nama tim" name="weight" value="{{old('weight')}}">
+                    <input type="number" class="form-control @error('weight') is-invalid @enderror" id="weight" placeholder="Masukkan Berat Badan" name="weight" value="{{old('weight')}}">
   
                     @error('weight')
                         <div class="invalid-feedback">{{ $message }}</div>
@@ -54,7 +54,7 @@
 
                 <div class="form-group">
                     <label for="nama">Nomor Punggung</label>
-                    <input type="number" class="form-control @error('nomor') is-invalid @enderror" id="nomor" placeholder="Masukkan nama tim" name="nomor" value="{{old('nomor')}}">
+                    <input type="number" class="form-control @error('nomor') is-invalid @enderror" id="nomor" placeholder="Masukkan Nomor Punggung" name="nomor" value="{{old('nomor')}}">
   
                     @error('nomor')
                         <div class="invalid-feedback">{{ $message }}</div>

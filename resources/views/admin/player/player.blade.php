@@ -1,6 +1,6 @@
 @extends('/Main/Admin/main')
 
-@section('title', 'Team View')
+@section('title', 'Pemain View')
 
 @section('body')
     <div class="container mt-5 mb-5">
@@ -11,7 +11,10 @@
             </div>
         @endif
 
-        <a href=" {{url('admin/player/create')}} " class="btn btn-primary mb-3"> Tambah Data Pemain</a> 
+        <div style="position: relative">
+            <a href=" {{url('admin/player/create')}} " class="btn btn-primary mb-3"> Tambah Data Pemain</a> 
+            <a href=" {{url('admin/player/softdelete')}} " class="btn btn-danger mb-3" style="position: absolute; right:0"> Lihat Data Pemain Yang Sudah Terhapus</a> 
+        </div>
         
         <div class="table-responsive">
             <table class="table ">
@@ -50,20 +53,20 @@
 
         <div class="mt-3">
             <nav aria-label="...">
-                <ul class="pagination">
+                <ul class="pagination" style="justify-content: center" >
     
                 <li class="page-item  @if($pref==0) disabled @endif">     
-                    <a class="page-link" href="{{url('/admin/books?page='.$pref)}}" tabindex="-1">Previous</a>
+                    <a class="page-link" href="{{url('/admin/schedule?page='.$pref)}}" tabindex="-1">Previous</a>
                 </li>
                 
-                @foreach ($total as $t)
-                <li class="page-item @if($t==$active) active @endif  ">
-                    <a class="page-link" href="{{url('/admin/books?page='.$t)}}"> {{$t}} <span class="sr-only">(current)</span></a>
+                @foreach ($looping as $l)
+                <li class="page-item @if($l==$active) active @endif  ">
+                    <a class="page-link" href="{{url('/admin/player?page='.$l)}}"> {{$l}} <span class="sr-only">(current)</span></a>
                 </li>
                 @endforeach
 
                 <li class="page-item  @if($active>=$count) disabled @endif"> 
-                    <a class="page-link" href="{{url('/admin/books?page='.$next)}}" >Next</a>
+                    <a class="page-link" href="{{url('/admin/player?page='.$next)}}" >Next</a>
                 </li>
                 </ul>
            

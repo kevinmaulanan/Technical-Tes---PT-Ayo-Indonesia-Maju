@@ -1,6 +1,6 @@
 @extends('/Main/Admin/main')
 
-@section('title', 'Schedule View')
+@section('title', 'Schedule Restore')
 
 @section('body')
     <div class="container mt-5 mb-5 s">
@@ -12,8 +12,7 @@
         @endif
         
         <div style="position: relative">
-            <a href=" {{url('admin/schedule/create')}} " class="btn btn-primary mb-3"> Tambah Data Schedule</a> 
-            <a href=" {{url('admin/schedule/softdelete')}} " class="btn btn-danger mb-3" style="position: absolute; right:0"> Lihat Data Schedule Yang Sudah Terhapus</a> 
+            <a href=" {{url('admin/schedule')}} " class="btn btn-primary mb-3">Kembali dan Lihat Data Schedule</a> 
         </div>
        
         
@@ -39,7 +38,7 @@
                     <td> <p align="justify"> {{$s->host->team_name}}</p> </td>
                     <td> <p align="justify"> {{$s->guest->team_name}}</p> </td>
                     <td>
-                       <a href="{{url('admin/schedule/'.$s->id)}}">View </a>
+                        <a href="{{url('admin/schedule/restore/'.$s->id)}}">Pulihkan </a>
                     </td>
                 </tr>
                 @endforeach

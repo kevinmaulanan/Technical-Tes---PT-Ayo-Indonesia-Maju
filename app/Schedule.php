@@ -12,6 +12,8 @@ class Schedule extends Model
 
     use SoftDeletes;
 
+    
+
     public function host()
     {
         return $this->belongsTo('App\Team','id_host');

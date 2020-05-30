@@ -41,7 +41,8 @@
             "database/factories"
         ],
         "files": [
-            "app/HTTP/Helper/validate.php"
+            "app/HTTP/Helper/validate.php",
+            "app/HTTP/Helper/pagination.php"
         ]
     },
     "autoload-dev": {

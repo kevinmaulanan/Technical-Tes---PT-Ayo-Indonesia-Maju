@@ -2,12 +2,13 @@
 @section('title', 'Tambah Teams')
     
 @section('body')
-<div class="container">  
+<div class="container mt-3">  
   <div class="card" style="width: 18rem;">
-        <img class="card-img-top" src="{{asset('/storage/tim/'.$team->team_logo)}}"  alt="Card image cap">
+        <img class="card-img-top" src="{{asset('/storage/tim/'.$team->team_logo)}}" height="250"  alt="Card image cap">
         <div class="card-body">
-        <h5 class="card-title"> {{$team->team_name}} </h5>
-        <p class="card-text">{{$team->team_address}}.</p>
+        <h5 class="card-title"> Nama Tim : {{$team->team_name}} </h5>
+        <p class="card-text">Alamat Matkas Tim : {{$team->team_address}}</p>
+        <p class="card-text">Kota Tim : {{$team->team_city}}</p>
         
         <div class="" style="">
           <a href="{{url('admin/team/update/'.$team->id)}}" class="btn btn-primary">Update </a>

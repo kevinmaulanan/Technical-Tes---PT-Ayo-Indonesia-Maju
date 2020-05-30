@@ -1,11 +1,11 @@
 @extends('Main/Admin/main')
-@section('title', 'Tambah Players')
+@section('title', 'Update Players')
     
 @section('body')
 <div class="container">
     <div class="row" style="margin-bottom: 200px; margin-top: 30px">
         <div class="col-8">
-            <h1>Form Create Player</h1>
+            <h1>Form Update Player</h1>
 
             <form method="post" action="{{url('/admin/player/'. $player->id)}} " enctype="multipart/form-data">
                 @csrf
@@ -13,7 +13,7 @@
 
                 <div class="form-group">
                   <label for="player">Nama Pemain</label>
-                  <input type="text" class="form-control @error('player') is-invalid @enderror" id="player" placeholder="Masukkan nama tim" name="player" value="{{$player->player_name}}">
+                  <input type="text" class="form-control @error('player') is-invalid @enderror" id="player" name="player" value="{{$player->player_name}}">
 
                   @error('player')
                     <div class="invalid-feedback">{{ $message }}</div>
@@ -22,7 +22,7 @@
 
                 <div class="form-group">
                     <label for="nama">Tinggi Badan</label>
-                    <input type="number" class="form-control @error('tall') is-invalid @enderror" id="tall" placeholder="Masukkan nama tim" name="tall" value="{{$player->player_tall}}">
+                    <input type="number" class="form-control @error('tall') is-invalid @enderror" id="tall" name="tall" value="{{$player->player_tall}}">
   
                     @error('tall')
                         <div class="invalid-feedback">{{ $message }}</div>
@@ -31,20 +31,25 @@
 
                 <div class="form-group">
                     <label for="nama">Berat Badan</label>
-                    <input type="number" class="form-control @error('weight') is-invalid @enderror" id="weight" placeholder="Masukkan nama tim" name="weight" value="{{$player->player_weight}}">
+                    <input type="number" class="form-control @error('weight') is-invalid @enderror" id="weight" name="weight" value="{{$player->player_weight}}">
   
                     @error('weight')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
 
+             
                 <div class="form-group">
                     <label for="nama">Nomor Punggung</label>
-                    <input type="number" class="form-control @error('nomor') is-invalid @enderror" id="nomor" placeholder="Masukkan nama tim" name="nomor" value="{{$player->player_nomor}}">
+                    <input type="number" class="form-control @if(session('error')) is-invalid @endif  @error('nomor') is-invalid @enderror" id="nomor" name="nomor" value="{{$player->player_nomor}}">
   
                     @error('nomor')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
+
+                    @if(session('error')) 
+                        <div class="invalid-feedback">{{session('error')}}</div>
+                    @endif
                 </div>
 
                 <div class="form-group">
@@ -64,7 +69,7 @@
 
                 <div class="form-group">
                     <label for="nama">Team</label>
-                    <select class="custom-select @error('team') is-invalid @enderror" id="team" id="inputGroupSelect02" name="team">
+                    <select class="custom-select @if(session('error')) is-invalid @endif @error('team') is-invalid @enderror" id="team" id="inputGroupSelect02" name="team">
                         <option value="{{$player->id_team}}">{{$player->team->team_name}}</option>
                         
                         @foreach($team as $t)
@@ -75,6 +80,10 @@
                     @error('team')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
+
+                    @if(session('error')) 
+                        <div class="invalid-feedback">{{session('error')}}</div>
+                    @endif
                 </div>
 
                <button type="submit" class="btn btn-primary">Update Data player</button>

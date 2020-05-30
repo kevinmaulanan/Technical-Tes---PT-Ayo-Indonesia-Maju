@@ -10,8 +10,11 @@
                 {{session('message')}}
             </div>
         @endif
-
-        <a href=" {{url('admin/team/create')}} " class="btn btn-primary mb-3"> Tambah Data Tim</a> 
+        
+        <div style="position: relative">
+            <a href=" {{url('admin/team/create')}} " class="btn btn-primary mb-3"> Tambah Data Tim</a> 
+            <a href=" {{url('admin/team/softdelete')}} " class="btn btn-danger mb-3" style="position: absolute; right:0"> Lihat Data Tim Yang Sudah Terhapus</a> 
+        </div>
         
         <div class="table-responsive">
             <table class="table ">
@@ -47,22 +50,21 @@
         </div>
 
         <div class="mt-3">
-            <nav aria-label="...">
-                <ul class="pagination">
-    
-                <li class="page-item  @if($pref==0) disabled @endif">     
-                    <a class="page-link" href="{{url('/admin/books?page='.$pref)}}" tabindex="-1">Previous</a>
-                </li>
-                
-                @foreach ($total as $t)
-                <li class="page-item @if($t==$active) active @endif  ">
-                    <a class="page-link" href="{{url('/admin/books?page='.$t)}}"> {{$t}} <span class="sr-only">(current)</span></a>
-                </li>
-                @endforeach
+            <nav aria-label="..." >
+                <ul class="pagination" style="justify-content: center" >
+                    <li class="page-item  @if($pref==0) disabled @endif">     
+                        <a class="page-link" href="{{url('/admin/team?page='.$pref)}}" tabindex="-1">Previous</a>
+                    </li>
+                    
+                    @foreach ($looping as $l)
+                    <li class="page-item @if($l==$active) active @endif  ">
+                        <a class="page-link" href="{{url('/admin/team?page='.$l)}}"> {{$l}} <span class="sr-only">(current)</span></a>
+                    </li>
+                    @endforeach
 
-                <li class="page-item  @if($active>=$count) disabled @endif"> 
-                    <a class="page-link" href="{{url('/admin/books?page='.$next)}}" >Next</a>
-                </li>
+                    <li class="page-item  @if($active>=$count) disabled @endif"> 
+                        <a class="page-link" href="{{url('/admin/team?page='.$next)}}" >Next</a>
+                    </li>
                 </ul>
            
             </nav>
