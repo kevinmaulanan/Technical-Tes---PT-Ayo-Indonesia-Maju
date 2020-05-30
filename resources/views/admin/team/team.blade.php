@@ -3,7 +3,7 @@
 @section('title', 'Team View')
 
 @section('body')
-    <div class="container mt-5 mb-5 s">
+    <div class="container mt-5 mb-5" >
 
         @if(session('message'))
             <div class="alert alert-success">
@@ -31,7 +31,7 @@
                 @foreach($team as $t)
                 <tr>
                     <th scope="row"> {{ $loop->iteration }} </th>
-                    <td> {{$t->team_name}} </td>
+                    <th scope="row"> {{$t->team_name}} </th>
                     <td> <img src=" {{asset('/storage/tim/'.$t->team_logo)}}" height="100" width="100" alt="Image"> </td>
                     <td> <p align="justify"> {{$t->team_since}}</p> </td>
                     <td> <p align="justify"> {{$t->team_address}}</p> </td>

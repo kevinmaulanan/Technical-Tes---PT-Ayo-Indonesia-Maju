@@ -17,9 +17,9 @@ class Result extends Migration
             $table->bigIncrements('id');
             
             $table->string('score',64);
-            $table->unsignedBigInteger('id_player');
+            $table->unsignedBigInteger('id_results_players');
 
-            $table->foreign('id_player')->references('id')->on('players')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('id_results_players')->references('id')->on('players')->onDelete('cascade')->onUpdate('cascade');
 
             $table->timestamps();
         });

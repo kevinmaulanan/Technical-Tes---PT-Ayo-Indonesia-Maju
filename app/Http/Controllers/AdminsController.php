@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
-
+use App\Schedule;
+use App\Team;
+use App\Player;
+use App\Position;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
@@ -36,7 +39,7 @@ class AdminsController extends Controller
         $next = $page + 1;
         $pref = $page - 1;
 
-        $team = DB::table('teams')->limit(5)->offset(($page - 1) * 5)->get();
+        $team = Team::limit(5)->offset(($page - 1) * 5)->get();
         
         $total = ceil(DB::table('teams')->count() / 5);
         $number = range(1, $total);
@@ -50,8 +53,58 @@ class AdminsController extends Controller
         return view('admin/team/createteam');
     }
 
+    public function teamupdateview(Team $team)
+    {
+        return view('admin/team/updateteam', compact('team'));
+    }
+
+    public function teambyid(\App\Team $team)
+    {
+        return view('admin/team/teambyid', compact('team'));
+    }
+    
+    public function teamdelete(Team $team)
+    {
+        Team::destroy($team->id);
+        return redirect('admin/team')->with('message', 'Tim berhasil dihapus');
+    }
+
+    public function teamupdate(Request $request, Team $team)
+    {
+        validateTeamUpdate($request);
+       
+        if ($request->file('logo')){
+            $request->validate([
+                'logo'=> 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
+
+            $fileNameLogo = 'Tim-' . $request->team_name . '-' . time() . '.' . $image->getClientOriginalExtension();
+            
+            Team::where('id', $team->id)->update([
+                'team_name'=> $request->team_name,
+                'team_logo'=> $fileNameLogo,
+                'team_since'=> $request->date,
+                'team_address'=> $request->address,
+                'team_city'=> $request->city
+            ]);
+
+            $image->storeAs('public/tim', $fileNameLogo);
+        }
+        else {
+            Team::where('id', $team->id)->update([
+                'team_name'=> $request->team_name,
+                'team_since'=> $request->date,
+                'team_address'=> $request->address,
+                'team_city'=> $request->city
+            ]);
+        }
+    
+        return redirect('admin/team')->with('message', 'Tim berhasil diupdate');
+    }
+
     public function teamcreate(Request $request)
     {  
+        // validateTeam($request);
         $request->validate([
         'team_name'=> 'required|unique:teams|max:128',
         'date' => 'required|date',
@@ -96,7 +149,7 @@ class AdminsController extends Controller
         $next = $page + 1;
         $pref = $page - 1;
 
-        $player = DB::table('players')->limit(5)->offset(($page - 1) * 5)->get();
+        $player = Player::limit(5)->offset(($page - 1) * 5)->get();
         
         $total = ceil(DB::table('players')->count() / 5);
         $number = range(1, $total);
@@ -109,6 +162,26 @@ class AdminsController extends Controller
         $position = DB::table('positions')->get();
         $team = DB::table('teams')->get();
         return view('admin/player/createplayer', ['position' => $position, 'team' => $team]);
+    }
+
+    public function playerupdateview(Player $player)
+    {
+        $position = Position::where('id', '!=', $player->id_position)->get();
+        $team = Team::where('id', '!=', $player->id_team)->get();
+  
+        return view('admin/player/updateplayer', compact('player','position','team'));
+    }
+
+    public function playerdelete(Player $player)
+    {
+        Player::destroy($player->id);
+        return redirect('admin/player')->with('message', 'Player berhasil dihapus');
+    }
+
+
+    public function playerbyid(Player $player)
+    {
+        return view('admin/player/playerbyid', compact('player'));
     }
 
     public function playercreate(Request $request)
@@ -137,19 +210,32 @@ class AdminsController extends Controller
     }
 
 
+    public function playerupdate(Request $request, Player $player)
+    {  
+        validatePlayerUpdate($request,$player);
+
+        Player::where('id',$player->id)->update([
+            'player_name'=> $request->player,
+            'player_tall'=> $request->tall,
+            'player_weight'=> $request->weight,
+            'player_nomor'=> $request->nomor,
+            'id_position'=> $request->position,
+            'id_team'=> $request->team,
+        ]);
+
+        return redirect('admin/player')->with('message', 'Data Player Sudah Ditambahkan');
+    }
+
+
     //schema
     public function schedule(Request $request)
     {
-        if ($request->input('page')) {
-            $page = $request->input('page');
-        } else {
-            $page = 1;
-        }
+        $page = $request->has('page') ? $request->get('page') : 1;
 
         $next = $page + 1;
         $pref = $page - 1;
 
-        $schedule = DB::table('schedules')->limit(5)->offset(($page - 1) * 5)->get();
+        $schedule = Schedule::limit(5)->offset(($page - 1) * 5)->get();
         
         $total = ceil(DB::table('schedules')->count() / 5);
         $number = range(1, $total);
@@ -159,30 +245,25 @@ class AdminsController extends Controller
 
     public function schedulecreateview()
     {
- 
         $team = DB::table('teams')->get();
         return view('admin/schedule/createschedule', ['team' => $team]);
     }
 
     public function schedulecreate(Request $request)
     {  
+     
         $request->validate([
-        'schedule'=> 'required|unique:schedules,schedule_name|max:128',
-        'tall' => 'required|min:1',
-        'weight'=> 'required|min:1',
-        'nomor'=> 'required|digits_between:1,99|unique:schedules,schedule_nomor,null,id,id_team,'.$request->team,
-        
-        'position'=> 'required',
-        'team'=> 'required|unique:schedules,id_team,null,id,schedule_nomor,'.$request->nomor,
+        'date' => 'required|date',
+        'time' => 'required',
+        'host' => 'required|different:guest',
+        'guest'=> 'required|different:host',
         ]);
 
         DB::table('schedules')->insert([
-            'schedule_name'=> $request->schedule,
-            'schedule_tall'=> $request->tall,
-            'schedule_weight'=> $request->weight,
-            'schedule_nomor'=> $request->nomor,
-            'id_position'=> $request->position,
-            'id_team'=> $request->team,
+            'match_date'=> $request->date,
+            'match_time'=> $request->time,
+            'id_host'=> $request->host,
+            'id_guest'=> $request->guest,
           
         ]);
 

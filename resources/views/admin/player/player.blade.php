@@ -3,7 +3,7 @@
 @section('title', 'Team View')
 
 @section('body')
-    <div class="container mt-5 mb-5 s">
+    <div class="container mt-5 mb-5">
 
         @if(session('message'))
             <div class="alert alert-success">
@@ -24,6 +24,7 @@
                     <th scope="col">Nomor Punggung</th>
                     <th scope="col">Posisi</th>
                     <th scope="col">Tim</th>
+                    <th scope="col">View</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -35,8 +36,8 @@
                     <td> <p align="justify"> {{$p->player_tall}} cm</p> </td>
                     <td> <p align="justify"> {{$p->player_weight}} kg</p> </td>
                     <td> <p align="justify"> {{$p->player_nomor}}</p> </td>
-                    <td> <p align="justify"> {{$p->id_position}}</p> </td>
-                    <td> <p align="justify"> {{$p->id_team}}</p> </td>
+                    <td> <p align="justify"> {{$p->position->position}}</p> </td>
+                    <td> <p align="justify"> {{$p->team->team_name}}</p> </td>
                     <td>
                        <a href="{{url('admin/player/'.$p->id)}}">View </a>
                     </td>

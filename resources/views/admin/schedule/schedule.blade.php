@@ -11,33 +11,31 @@
             </div>
         @endif
 
-        <a href=" {{url('admin/team/create')}} " class="btn btn-primary mb-3"> Tambah Data Tim</a> 
+        <a href=" {{url('admin/schedule/create')}} " class="btn btn-primary mb-3"> Tambah Data Tim</a> 
         
         <div class="table-responsive">
             <table class="table ">
                 <thead class="thead-light">
                 <tr>
                     <th scope="col">No</th>
-                    <th scope="col">Team</th>
-                    <th scope="col">Logo</th>
-                    <th scope="col">Since</th>
-                    <th scope="col">Address</th>
-                    <th scope="col">City</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Time</th>
+                    <th scope="col">Host</th>
+                    <th scope="col">Guest</th>
                     <th scope="col">Link</th>
                 </tr>
                 </thead>
                 <tbody>
 
-                @foreach($team as $t)
+                @foreach($schedule as $s)
                 <tr>
                     <th scope="row"> {{ $loop->iteration }} </th>
-                    <td> {{$t->team_name}} </td>
-                    <td> <img src=" {{asset('/storage/tim/'.$t->team_logo)}}" height="100" width="100" alt="Image"> </td>
-                    <td> <p align="justify"> {{$t->team_since}}</p> </td>
-                    <td> <p align="justify"> {{$t->team_address}}</p> </td>
-                    <td> <p align="justify"> {{$t->team_city}}</p> </td>
+                    <td> {{$s->match_date}} </td>
+                    <td> {{$s->match_time}} </td>
+                    <td> <p align="justify"> {{$s->host->team_name}}</p> </td>
+                    <td> <p align="justify"> {{$s->guest->team_name}}</p> </td>
                     <td>
-                       <a href="{{url('admin/team/'.$t->id)}}">View </a>
+                       <a href="{{url('admin/schedule/'.$s->id)}}">View </a>
                     </td>
                 </tr>
                 @endforeach
