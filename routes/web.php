@@ -23,7 +23,6 @@ Route::get('/admin', function () {
 
 Route::get('/admin', 'AdminsController@home');
 
-
 Route::get('/admin/team', 'TeamsController@team');
 Route::get('/admin/team/softdelete', 'TeamsController@softdelete');
 Route::get('/admin/team/create', 'TeamsController@teamcreateview');
