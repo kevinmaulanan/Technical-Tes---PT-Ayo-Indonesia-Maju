@@ -1,6 +1,7 @@
 <?php
 
 use App\Player;
+use App\Result;
 
 function validateTeamCreate($request){
     $request->validate([
@@ -62,7 +63,17 @@ function validateSchedule($request){
         ]);
     }
 
+    function validateResult($request){
+        $request->validate([
+            'time' => 'required',
+            'player' => 'required',
+            ]);
+        }
 
+function checkCountResult($request){
+    $count = Result::where('id_schedule', $request->idschedule)->count();
+    return $count;
+}
         
 
 ?>

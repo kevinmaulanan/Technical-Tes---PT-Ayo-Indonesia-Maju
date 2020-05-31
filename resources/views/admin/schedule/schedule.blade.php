@@ -33,13 +33,14 @@
 
                 @foreach($schedule as $s)
                 <tr>
-                    <th scope="row"> {{ $loop->iteration }} </th>
+                    <th scope="row"> {{ $loop->iteration + (5 * ($active-1))  }} </th>
                     <td> {{$s->match_date}} </td>
                     <td> {{$s->match_time}} </td>
                     <td> <p align="justify"> {{$s->host->team_name}}</p> </td>
                     <td> <p align="justify"> {{$s->guest->team_name}}</p> </td>
                     <td>
-                       <a href="{{url('admin/schedule/'.$s->id)}}">View </a>
+                       <a class="btn btn-primary" href="{{url('admin/schedule/'.$s->id)}}">View </a>
+                       <a class="btn btn-success" href="{{url('admin/result/create/'.$s->id)}}">Tambah Skor </a>
                     </td>
                 </tr>
                 @endforeach

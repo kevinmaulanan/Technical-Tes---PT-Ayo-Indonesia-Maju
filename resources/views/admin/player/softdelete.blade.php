@@ -1,6 +1,6 @@
 @extends('/Main/Admin/main')
 
-@section('title', 'Pemain View')
+@section('title', 'Pemain Restore')
 
 @section('body')
     <div class="container mt-5 mb-5">
@@ -12,8 +12,7 @@
         @endif
 
         <div style="position: relative">
-            <a href=" {{url('admin/player/create')}} " class="btn btn-primary mb-3"> Tambah Data Pemain</a> 
-            <a href=" {{url('admin/player/softdelete')}} " class="btn btn-danger mb-3" style="position: absolute; right:0"> Lihat Data Pemain Yang Sudah Terhapus</a> 
+            <a href=" {{url('admin/player')}} " class="btn btn-primary mb-3">Kembali dan Lihat Data Pemain</a> 
         </div>
         
         <div class="table-responsive">
@@ -42,7 +41,7 @@
                     <td> <p align="justify"> {{$p->position->position}}</p> </td>
                     <td> <p align="justify"> {{$p->team->team_name}}</p> </td>
                     <td>
-                       <a href="{{url('admin/player/'.$p->id)}}">View </a>
+                       <a href="{{url('admin/player/restore/'.$p->id)}}">Pulihkan </a>
                     </td>
                 </tr>
                 @endforeach

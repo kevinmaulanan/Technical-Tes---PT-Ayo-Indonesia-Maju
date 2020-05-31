@@ -88,9 +88,9 @@ class PlayersController extends Controller
         $next = $page + 1;
         $pref = $page - 1;
 
-        $team = Player::onlyTrashed()->limit(5)->offset(($page - 1) * 5)->get();
+        $player = Player::onlyTrashed()->limit(5)->offset(($page - 1) * 5)->get();
         
-        $total = ceil(Player::count() / 5);
+        $total = ceil(Player::onlyTrashed()->count() / 5);
         $number = range(1, $total);
 
     	return view('admin/player/softdelete', ['player' => $player, 'active' => $page, 'pref'=> $pref, 'next'=> $next, 'looping' => $number, 'count'=>$total]);
@@ -102,10 +102,10 @@ class PlayersController extends Controller
         return redirect('admin/player')->with('message', 'Pemain : ' .$player->player_name .'Berhasil Dihapus');
     }
 
-    public function schedulerestore($id){
-        $schedule = Schedule::where('id',$id)->onlyTrashed()->first();
+    public function playerrestore($id){
+        $player = Player::where('id',$id)->onlyTrashed()->first();
     
-        Schedule::onlyTrashed()->where('id', $id)->restore();
+        Player::onlyTrashed()->where('id', $id)->restore();
         return redirect('admin/player')->with('message', 'Player Sudah Berhasi Dikembalikan');
     }
 }

@@ -33,14 +33,14 @@
 
                 @foreach($team as $t)
                 <tr>
-                    <th scope="row"> {{ $loop->iteration }} </th>
+                    <th scope="row"> {{ $loop->iteration + (5 * ($active-1)) }} </th>
                     <th scope="row"> {{$t->team_name}} </th>
                     <td> <img src=" {{asset('/storage/tim/'.$t->team_logo)}}" height="100" width="100" alt="Image"> </td>
                     <td> <p align="justify"> {{$t->team_since}}</p> </td>
                     <td> <p align="justify"> {{$t->team_address}}</p> </td>
                     <td> <p align="justify"> {{$t->team_city}}</p> </td>
                     <td>
-                       <a href="{{url('admin/team/'.$t->id)}}">View </a>
+                       <a  href="{{url('admin/team/'.$t->id)}}">View </a>
                     </td>
                 </tr>
                 @endforeach

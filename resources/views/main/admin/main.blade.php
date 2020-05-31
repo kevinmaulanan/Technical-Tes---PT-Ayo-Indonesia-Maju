@@ -36,6 +36,9 @@
         <li class="nav-item">
           <a class="nav-link" href="{{url('admin/schedule')}}">Schedule</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{url('admin/result')}}">Result</a>
+        </li>
       
       </ul>
     </div>

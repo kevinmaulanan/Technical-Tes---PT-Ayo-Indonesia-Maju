@@ -106,7 +106,7 @@ class TeamsController extends Controller
 
         $team = Team::onlyTrashed()->limit(5)->offset(($page - 1) * 5)->get();
         
-        $total = ceil(Team::count() / 5);
+        $total = ceil(Team::onlyTrashed()->count() / 5);
         $number = range(1, $total);
 
     	return view('admin/team/softdelete', ['team' => $team, 'active' => $page, 'pref'=> $pref, 'next'=> $next, 'looping' => $number, 'count'=>$total]);

@@ -34,6 +34,7 @@ Route::patch('/admin/team/{team}', 'TeamsController@teamupdate');
 Route::delete('/admin/team/{team}', 'TeamsController@teamdelete');
 
 Route::get('/admin/player', 'PlayersController@player');
+Route::get('/admin/player/softdelete', 'PlayersController@softdelete');
 Route::get('/admin/player/create', 'PlayersController@playercreateview');
 Route::get('/admin/player/update/{player}', 'PlayersController@playerupdateview');
 Route::get('/admin/player/{player}', 'PlayersController@playerbyid');
@@ -51,3 +52,14 @@ Route::get('/admin/schedule/{schedule}', 'SchedulesController@schedulebyid');
 Route::post('/admin/schedule', 'SchedulesController@schedulecreate');
 Route::patch('/admin/schedule/{schedule}', 'SchedulesController@scheduleupdate');
 Route::delete('/admin/schedule/{schedule}', 'SchedulesController@scheduledelete');
+
+
+Route::get('/admin/result', 'ResultsController@result');
+Route::get('/admin/result/softdelete', 'ResultsController@softdelete');
+Route::get('/admin/result/create/{result}', 'ResultsController@resultcreateview');
+Route::get('/admin/result/update/{result}', 'ResultsController@resultupdateview');
+Route::get('/admin/result/restore/{result}', 'ResultsController@resultrestore');
+Route::get('/admin/result/{result}', 'ResultsController@resultbyid');
+Route::post('/admin/result', 'ResultsController@resultcreate');
+Route::patch('/admin/result/{result}', 'ResultsController@resultupdate');
+Route::delete('/admin/result/{result}', 'ResultsController@resultdelete');

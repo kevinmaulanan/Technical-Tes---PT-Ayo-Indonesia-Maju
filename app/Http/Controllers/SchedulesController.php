@@ -56,6 +56,12 @@ class SchedulesController extends Controller
             'id_guest'=> $request->guest,
         ]);
 
+        $maxIdSchedule = Schedule::max('id');
+        DB::table('results')->insert([
+            'score' => '0 - 0',
+            'id_schedule' => $maxIdSchedule
+        ]);
+
         return redirect('admin/schedule')->with('message', 'Data Schedule Sudah Ditambahkan');
     }
 
@@ -81,7 +87,7 @@ class SchedulesController extends Controller
 
         $schedule = Schedule::onlyTrashed()->limit(5)->offset(($page - 1) * 5)->get();
         
-        $total = ceil(Schedule::count() / 5);
+        $total = ceil(Schedule::onlyTrashed()->count() / 5);
         $number = range(1, $total);
 
     	return view('admin/schedule/softdelete', ['schedule' => $schedule, 'active' => $page, 'pref'=> $pref, 'next'=> $next, 'looping' => $number, 'count'=>$total]);

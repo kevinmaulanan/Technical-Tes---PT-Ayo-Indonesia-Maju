@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Result extends Migration
+class Results extends Migration
 {
     /**
      * Run the migrations.
@@ -17,11 +17,12 @@ class Result extends Migration
             $table->bigIncrements('id');
             
             $table->string('score',64);
-            $table->unsignedBigInteger('id_results_players');
+            $table->unsignedBigInteger('id_schedule');
 
-            $table->foreign('id_results_players')->references('id')->on('players')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('id_schedule')->references('id')->on('schedules')->onDelete('cascade')->onUpdate('cascade');
 
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
